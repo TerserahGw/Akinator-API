@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Akinator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #333;
+        }
+        h2 {
+            color: #555;
+        }
+        pre {
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .route {
+            margin-bottom: 20px;
+        }
+        .route h2 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dokumentasi API Akinator</h1>
+    <p>API ini menyediakan antarmuka untuk memainkan permainan Akinator. Berikut adalah petunjuk penggunaan API secara urut:</p>
+
+    <div class="route">
+        <h2>1. Mulai Permainan</h2>
+        <p>Endpoint: <code>/start</code></p>
+        <p>Metode: <strong>GET</strong></p>
+        <p>Deskripsi: Memulai permainan Akinator dan mendapatkan pertanyaan pertama.</p>
+        <p>Contoh Respon:</p>
+        <pre>
+{
+    "question": "Apakah karakter ini manusia?"
+}
+        </pre>
+    </div>
+
+    <div class="route">
+        <h2>2. Menjawab Pertanyaan</h2>
+        <p>Endpoint: <code>/answer</code></p>
+        <p>Metode: <strong>GET</strong></p>
+        <p>Parameter Query: <code>q</code> (Jawaban, bisa <code>y</code>, <code>n</code>, <code>idk</code>, <code>p</code>, atau <code>pn</code>)</p>
+        <p>Deskripsi: Mengirimkan jawaban untuk pertanyaan yang sedang ditanyakan.</p>
+        <p>Contoh Respon jika karakter ditemukan:</p>
+        <pre>
+{
+    "name": "Harry Potter",
+    "description": "Seorang penyihir yang terkenal dari seri buku Harry Potter."
+}
+        </pre>
+        <p>Contoh Respon jika masih ada pertanyaan:</p>
+        <pre>
+{
+    "question": "Apakah karakter ini memiliki kekuatan super?"
+}
+        </pre>
+    </div>
+
+    <div class="route">
+        <h2>3. Kembali ke Pertanyaan Sebelumnya</h2>
+        <p>Endpoint: <code>/back</code></p>
+        <p>Metode: <strong>POST</strong></p>
+        <p>Deskripsi: Mengembalikan permainan ke pertanyaan sebelumnya.</p>
+        <p>Contoh Respon:</p>
+        <pre>
+{
+    "question": "Apakah karakter ini seorang penyihir?"
+}
+        </pre>
+    </div>
+
+    <div class="route">
+        <h2>4. Mengecualikan Karakter</h2>
+        <p>Endpoint: <code>/exclude</code></p>
+        <p>Metode: <strong>POST</strong></p>
+        <p>Deskripsi: Mengecualikan karakter dari hasil permainan dan melanjutkan permainan.</p>
+        <p>Contoh Respon:</p>
+        <pre>
+{
+    "question": "Apakah karakter ini memiliki teman hewan peliharaan?"
+}
+        </pre>
+    </div>
+
+    <div class="route">
+        <h2>5. Melihat Kemajuan Permainan</h2>
+        <p>Endpoint: <code>/progress</code></p>
+        <p>Metode: <strong>GET</strong></p>
+        <p>Deskripsi: Mendapatkan informasi tentang kemajuan permainan saat ini.</p>
+        <p>Contoh Respon:</p>
+        <pre>
+{
+    "progression": 50,
+    "step": 5
+}
+        </pre>
+    </div>
+
+    <p>Silakan gunakan endpoint-endpoint ini untuk berinteraksi dengan API Akinator dan nikmati permainan!</p>
+</body>
+</html>
