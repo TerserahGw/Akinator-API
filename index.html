@@ -43,6 +43,7 @@
         <p>Contoh Respon:</p>
         <pre>
 {
+    "user_token": "example-token-1234",
     "question": "Apakah karakter ini manusia?"
 }
         </pre>
@@ -53,12 +54,21 @@
         <p>Endpoint: <code>/answer</code></p>
         <p>Metode: <strong>GET</strong></p>
         <p>Parameter Query: <code>q</code> (Jawaban, bisa <code>y</code>, <code>n</code>, <code>idk</code>, <code>p</code>, atau <code>pn</code>)</p>
+        <p>Parameter Query Tambahan: <code>user_token</code> (opsional, jika tidak menggunakan cookie)</p>
         <p><code>y</code>: Ya atau Benar </p>
         <p><code>n</code>: Tidak atau Salah </p>
         <p><code>idk</code>: Tidak Tahu </p>
         <p><code>p</code>: Mungkin Saja </p>
         <p><code>pn</code>: Mungkin Tidak </p>
         <p>Deskripsi: Mengirimkan jawaban untuk pertanyaan yang sedang ditanyakan.</p>
+        <p>Contoh URL Tanpa <code>user_token</code>:</p>
+        <pre>
+/answer?q=y
+        </pre>
+        <p>Contoh URL Dengan <code>user_token</code>:</p>
+        <pre>
+/answer?q=y&user_token=example-token-1234
+        </pre>
         <p>Contoh Respon jika karakter ditemukan:</p>
         <pre>
 {
@@ -69,6 +79,7 @@
         <p>Contoh Respon jika masih ada pertanyaan:</p>
         <pre>
 {
+    "user_token": "example-token-1234",
     "question": "Apakah karakter ini memiliki kekuatan super?"
 }
         </pre>
@@ -78,10 +89,20 @@
         <h2>3. Kembali ke Pertanyaan Sebelumnya</h2>
         <p>Endpoint: <code>/back</code></p>
         <p>Metode: <strong>POST</strong></p>
+        <p>Parameter Query Tambahan: <code>user_token</code> (opsional, jika tidak menggunakan cookie)</p>
         <p>Deskripsi: Mengembalikan permainan ke pertanyaan sebelumnya.</p>
+        <p>Contoh URL Tanpa <code>user_token</code>:</p>
+        <pre>
+/back
+        </pre>
+        <p>Contoh URL Dengan <code>user_token</code>:</p>
+        <pre>
+/back?user_token=example-token-1234
+        </pre>
         <p>Contoh Respon:</p>
         <pre>
 {
+    "user_token": "example-token-1234",
     "question": "Apakah karakter ini seorang penyihir?"
 }
         </pre>
@@ -91,10 +112,20 @@
         <h2>4. Mengecualikan Karakter</h2>
         <p>Endpoint: <code>/exclude</code></p>
         <p>Metode: <strong>POST</strong></p>
+        <p>Parameter Query Tambahan: <code>user_token</code> (opsional, jika tidak menggunakan cookie)</p>
         <p>Deskripsi: Mengecualikan karakter dari hasil permainan dan melanjutkan permainan.</p>
+        <p>Contoh URL Tanpa <code>user_token</code>:</p>
+        <pre>
+/exclude
+        </pre>
+        <p>Contoh URL Dengan <code>user_token</code>:</p>
+        <pre>
+/exclude?user_token=example-token-1234
+        </pre>
         <p>Contoh Respon:</p>
         <pre>
 {
+    "user_token": "example-token-1234",
     "question": "Apakah karakter ini memiliki teman hewan peliharaan?"
 }
         </pre>
@@ -104,10 +135,20 @@
         <h2>5. Melihat Kemajuan Permainan</h2>
         <p>Endpoint: <code>/progress</code></p>
         <p>Metode: <strong>GET</strong></p>
+        <p>Parameter Query Tambahan: <code>user_token</code> (opsional, jika tidak menggunakan cookie)</p>
         <p>Deskripsi: Mendapatkan informasi tentang kemajuan permainan saat ini.</p>
+        <p>Contoh URL Tanpa <code>user_token</code>:</p>
+        <pre>
+/progress
+        </pre>
+        <p>Contoh URL Dengan <code>user_token</code>:</p>
+        <pre>
+/progress?user_token=example-token-1234
+        </pre>
         <p>Contoh Respon:</p>
         <pre>
 {
+    "user_token": "example-token-1234",
     "progression": 50,
     "step": 5
 }
