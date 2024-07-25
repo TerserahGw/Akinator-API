@@ -46,7 +46,7 @@ def post_answer():
                     "description": akinator.description
                 })
             else:
-                return jsonify({"question": akinator.question})
+                return jsonify({"user_token": user_token, "question": akinator.question})
         else:
             return jsonify({"error": "Invalid answer"}), 400
     except Exception as e:
@@ -62,7 +62,7 @@ def go_back():
 
         akinator = user_games[user_token]
         akinator.go_back()
-        return jsonify({"question": akinator.question})
+        return jsonify({"user_token": user_token, "question": akinator.question})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
@@ -76,7 +76,7 @@ def exclude():
 
         akinator = user_games[user_token]
         akinator.exclude()
-        return jsonify({"question": akinator.question})
+        return jsonify({"user_token": user_token, "question": akinator.question})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
@@ -91,7 +91,7 @@ def progress():
         akinator = user_games[user_token]
         progression = akinator.progression
         step = akinator.step
-        return jsonify({"progression": progression, "step": step})
+        return jsonify({"user_token": user_token, "progression": progression, "step": step})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
