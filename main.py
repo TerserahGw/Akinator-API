@@ -4,7 +4,6 @@ import uuid
 
 app = Flask(__name__, template_folder='.')
 
-# Global dictionary to store Akinator instances and game states for multiple users
 user_games = {}
 
 @app.route('/')
@@ -14,24 +13,26 @@ def welcome():
 @app.route('/start', methods=['GET'])
 def start_game():
     try:
-        # Generate a new token for the user
         user_token = str(uuid.uuid4())
         akinator = Akinator(lang="id")
         user_games[user_token] = akinator
         question = akinator.start_game()
 
-        # Set the token in a cookie
-        response = make_response(jsonify({"question": question}))
+        response = make_response(jsonify({"user_token": user_token, "question": question}))
         response.set_cookie('user_token', user_token)
         return response
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+def get_user_token():
+    user_token = request.args.get('user_token') or request.cookies.get('user_token')
+    return user_token
+
 @app.route('/answer', methods=['GET'])
 def post_answer():
     try:
         answer = request.args.get('q')
-        user_token = request.cookies.get('user_token')
+        user_token = get_user_token()
 
         if not user_token or user_token not in user_games:
             return jsonify({"error": "No game in progress"}), 400
@@ -54,7 +55,7 @@ def post_answer():
 @app.route('/back', methods=['POST'])
 def go_back():
     try:
-        user_token = request.cookies.get('user_token')
+        user_token = get_user_token()
 
         if not user_token or user_token not in user_games:
             return jsonify({"error": "No game in progress"}), 400
@@ -68,7 +69,7 @@ def go_back():
 @app.route('/exclude', methods=['POST'])
 def exclude():
     try:
-        user_token = request.cookies.get('user_token')
+        user_token = get_user_token()
 
         if not user_token or user_token not in user_games:
             return jsonify({"error": "No game in progress"}), 400
@@ -82,7 +83,7 @@ def exclude():
 @app.route('/progress', methods=['GET'])
 def progress():
     try:
-        user_token = request.cookies.get('user_token')
+        user_token = get_user_token()
 
         if not user_token or user_token not in user_games:
             return jsonify({"error": "No game in progress"}), 400
