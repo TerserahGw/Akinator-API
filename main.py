@@ -4,7 +4,11 @@ import uuid
 
 app = Flask(__name__, template_folder='.')
 
+# Global dictionary to store Akinator instances and game states for multiple users
 user_games = {}
+
+def get_user_token():
+    return request.args.get('user_token') or request.cookies.get('user_token')
 
 @app.route('/')
 def welcome():
@@ -23,10 +27,6 @@ def start_game():
         return response
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-
-def get_user_token():
-    user_token = request.args.get('user_token') or request.cookies.get('user_token')
-    return user_token
 
 @app.route('/answer', methods=['GET'])
 def post_answer():
